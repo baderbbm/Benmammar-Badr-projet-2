@@ -1,43 +1,46 @@
 package com.hemebiotech.analytics;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 public class AnalyticsCounter {
-	private static int headacheCount = 0;	// initialize to 0
-	private static int rashCount = 0;		// initialize to 0
-	private static int pupilCount = 0;		// initialize to 0
-	
-	public static void main(String args[]) throws Exception {
-		// first get input
-		BufferedReader reader = new BufferedReader (new FileReader("symptoms.txt"));
-		String line = reader.readLine();
-
-		int i = 0;	// set i to 0
-		int headCount = 0;	// counts headaches
-		while (line != null) {
-			i++;	// increment i
-			System.out.println("symptom from file: " + line);
-			if (line.equals("headache")) {
-				headCount++;
-				System.out.println("number of headaches: " + headCount);
-			}
-			else if (line.equals("rush")) {
-				rashCount++;
-			}
-			else if (line.contains("pupils")) {
-				pupilCount++;
-			}
-
-			line = reader.readLine();	// get another symptom
-		}
-		
-		// next generate output
-		FileWriter writer = new FileWriter ("result.out");
-		writer.write("headache: " + headacheCount + "\n");
-		writer.write("rash: " + rashCount + "\n");
-		writer.write("dialated pupils: " + pupilCount + "\n");
-		writer.close();
-	}
+  static Integer var = 1;
+  
+  public static void main(String args[]) throws IOException {
+   
+    HashMap<String, Integer> map = new HashMap<>();
+      try (Scanner a = new Scanner(new File("symptoms.txt"))) {
+          while (a.hasNextLine()) { // tant que il y a des lignes qui n'ont pas été lus  
+              String ligne = a.nextLine().trim(); // lire le fichier ligne par ligne
+              if (!ligne.isEmpty()) Ajouter(map, ligne); // ajouter la ligne qui n'est pas vide dans le HashMap 
+          } }
+   
+      try ( 
+              PrintWriter pw = new PrintWriter(new FileWriter("result.out"))) {
+          // Parcourir le tableau pour écrire les résultats dans le fichier
+          
+ // sortie de trype Map.Entry<String, Integer>          
+          for (Map.Entry<String, Integer> sortie : map.entrySet()) { // entrySet() pour obtenir un ensemble 
+            
+              pw.println(sortie.getKey() + " : " + sortie.getValue());
+          } 
+      }
+    
+    System.out.println("Résultat sauvegardé dans le fichier 'result.out'.");
+  }
+  
+  static void Ajouter(Map<String, Integer> map, String phrase) {
+    Object k = map.get(phrase);
+    if (k == null) map.put(phrase, var); // une nouvelle phrase est ajoutée
+    else {
+       // phrase déjà présente, sa valeur est incrémentée de 1
+      int nb = ((Integer) k) + 1;
+      map.put(phrase, nb);
+    }
+  }
 }
