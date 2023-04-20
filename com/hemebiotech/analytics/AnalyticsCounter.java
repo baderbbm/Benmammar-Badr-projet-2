@@ -15,17 +15,17 @@ public class AnalyticsCounter {
    
     HashMap<String, Integer> map = new HashMap<>();
       try (Scanner a = new Scanner(new File("symptoms.txt"))) {
-          while (a.hasNextLine()) { // tant que il y a des lignes qui n'ont pas été lus  
-              String ligne = a.nextLine().trim(); // lire le fichier ligne par ligne
-              if (!ligne.isEmpty()) Ajouter(map, ligne); // ajouter la ligne qui n'est pas vide dans le HashMap 
+          while (a.hasNextLine()) { // there are lines that have not been read   
+              String ligne = a.nextLine().trim(); // read the file line by line
+              if (!ligne.isEmpty()) Ajouter(map, ligne); // add the line that is not empty in the HashMap 
           } }
    
       try ( 
               PrintWriter pw = new PrintWriter(new FileWriter("result.out"))) {
-          // Parcourir le tableau pour écrire les résultats dans le fichier
+          // browse through the table and record the results in the file
           
- // sortie de trype Map.Entry<String, Integer>          
-          for (Map.Entry<String, Integer> sortie : map.entrySet()) { // entrySet() pour obtenir un ensemble 
+ // sortie of type Map.Entry<String, Integer>          
+          for (Map.Entry<String, Integer> sortie : map.entrySet()) { // entrySet() to obtain a set 
             
               pw.println(sortie.getKey() + " : " + sortie.getValue());
           } 
@@ -36,9 +36,9 @@ public class AnalyticsCounter {
   
   static void Ajouter(Map<String, Integer> map, String phrase) {
     Object k = map.get(phrase);
-    if (k == null) map.put(phrase, var); // une nouvelle phrase est ajoutée
+    if (k == null) map.put(phrase, var); // a new symptom is added
     else {
-       // phrase déjà présente, sa valeur est incrémentée de 1
+       // symptom already present, its value is incremented by 1
       int nb = ((Integer) k) + 1;
       map.put(phrase, nb);
     }
