@@ -5,11 +5,40 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 public class AnalyticsCounter {
-  
+ 
+    private ISymptomReader reader;
+    private ISymptomWriter writer;
+    
+public AnalyticsCounter(ISymptomReader reader, ISymptomWriter writer) { 
+    this.reader=reader;
+   this.writer=writer;
+}
+        
+public List<String> getSymptoms() {  
+    return reader.getSymptoms();
+}
+
+public Map<String, Integer> countSymptoms(List<String> symptoms) {
+    HashMap<String, Integer> map = new HashMap<>();
+    symptoms.forEach(symptom -> {
+        map.compute(symptom, (key, value) -> (value == null) ? 1 : value + 1);
+        });
+return map;
+}
+
+public Map<String, Integer> sortSymptoms(Map<String, Integer> symptoms) { 
+ return new TreeMap<>(symptoms);
+}
+
+public void writeSymptoms(Map<String, Integer> symptoms) { 
+writer.writeSymptoms(symptoms);
+}
   
   public static void main(String args[]) throws IOException {
    
@@ -34,7 +63,8 @@ public class AnalyticsCounter {
     System.out.println("Résultat sauvegardé dans le fichier 'result.out'.");
   }
   
-   static void ajouter(Map<String, Integer> map, String phrase) {
+  static void ajouter(Map<String, Integer> map, String phrase) {
 map.compute(phrase, (key, value) -> (value == null) ? 1 : value + 1);
 }
+  
 }
