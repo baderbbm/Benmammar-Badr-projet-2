@@ -17,7 +17,7 @@ public class AnalyticsCounter {
       try (Scanner a = new Scanner(new File("symptoms.txt"))) {
           while (a.hasNextLine()) { // there are lines that have not been read   
               String ligne = a.nextLine().trim(); // read the file line by line
-              if (!ligne.isEmpty()) Ajouter(map, ligne); // add the line that is not empty in the HashMap 
+              if (!ligne.isEmpty()) ajouter(map, ligne); // add the line that is not empty in the HashMap 
           } }
    
       try ( 
@@ -34,13 +34,7 @@ public class AnalyticsCounter {
     System.out.println("Résultat sauvegardé dans le fichier 'result.out'.");
   }
   
-  static void Ajouter(Map<String, Integer> map, String phrase) {
-    Object k = map.get(phrase);
-    if (k == null) map.put(phrase, var); // a new symptom is added
-    else {
-       // symptom already present, its value is incremented by 1
-      int nb = ((Integer) k) + 1;
-      map.put(phrase, nb);
-    }
-  }
+   static void ajouter(Map<String, Integer> map, String phrase) {
+map.compute(phrase, (key, value) -> (value == null) ? 1 : value + 1);
+}
 }
