@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class AnalyticsCounter {
-  static Integer var = 1;
+  
   
   public static void main(String args[]) throws IOException {
    
