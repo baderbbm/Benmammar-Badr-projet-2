@@ -9,8 +9,8 @@ import java.util.Map;
 public class Main {
         public static void main(String args[]) throws IOException {
         
-      ISymptomReader r= new ReadSymptomDataFromFile ("symptoms.txt");
-      ISymptomWriter w= new WriteSymptomDataToFile ();
+      ISymptomReader r = new ReadSymptomDataFromFile ("symptoms.txt");
+      ISymptomWriter w = new WriteSymptomDataToFile ();
       AnalyticsCounter a = new AnalyticsCounter (r, w);
       List<String> liste = a.getSymptoms();
      Map<String, Integer> map=a.countSymptoms(liste);

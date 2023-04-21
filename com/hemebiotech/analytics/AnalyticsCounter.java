@@ -7,8 +7,8 @@ import java.util.TreeMap;
 
 public class AnalyticsCounter {
  
-    private final ISymptomReader reader;
-    private final ISymptomWriter writer;
+    private ISymptomReader reader;
+    private ISymptomWriter writer;
     
 public AnalyticsCounter(ISymptomReader reader, ISymptomWriter writer) { 
     this.reader=reader;
