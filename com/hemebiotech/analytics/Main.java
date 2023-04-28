@@ -17,7 +17,7 @@ public class Main {
   */
   public static void main(String [] args) throws IOException {
     ISymptomReader symptomReader = new ReadSymptomDataFromFile("symptoms.txt");
-    ISymptomWriter resultWriter = new WriteSymptomDataToFile();
+    ISymptomWriter resultWriter = new WriteSymptomDataToFile("result.out");
     AnalyticsCounter analyticsCounter = new AnalyticsCounter(symptomReader, resultWriter);
     List<String> liste = analyticsCounter.getSymptoms();
     Map<String, Integer> map = analyticsCounter.countSymptoms(liste);
