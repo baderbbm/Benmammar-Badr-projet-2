@@ -19,7 +19,7 @@ public class WriteSymptomDataToFile implements ISymptomWriter {
         pw.println(sortie.getKey() + " : " + sortie.getValue());
       }
     } catch (IOException ex) {
-      // handle exception
+      System.err.println("Erreur lors de l'écriture des symptômes dans le fichier result.out");
     }
     System.out.println("Résultat sauvegardé dans le fichier 'result.out'.");
   }
