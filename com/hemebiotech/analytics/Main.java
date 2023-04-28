@@ -16,12 +16,12 @@ public class Main {
   * @throws IOException if an I/O error occurs.
   */
   public static void main(String [] args) throws IOException {
-    ISymptomReader r = new ReadSymptomDataFromFile("symptoms.txt");
-    ISymptomWriter w = new WriteSymptomDataToFile();
-    AnalyticsCounter a = new AnalyticsCounter(r, w);
-    List<String> liste = a.getSymptoms();
-    Map<String, Integer> map = a.countSymptoms(liste);
-    map = a.sortSymptoms(map);
-    a.writeSymptoms(map);
+    ISymptomReader symptomReader = new ReadSymptomDataFromFile("symptoms.txt");
+    ISymptomWriter resultWriter = new WriteSymptomDataToFile();
+    AnalyticsCounter analyticsCounter = new AnalyticsCounter(symptomReader, resultWriter);
+    List<String> liste = analyticsCounter.getSymptoms();
+    Map<String, Integer> map = analyticsCounter.countSymptoms(liste);
+    map = analyticsCounter.sortSymptoms(map);
+    analyticsCounter.writeSymptoms(map);
   }
 }
