@@ -31,7 +31,7 @@ public class AnalyticsCounter {
   * 
   * @return the list of symptoms.
   */
-  public List<String> getSymptoms() {  
+  public List<String> getSymptoms() throws IOException {  
     return reader.getSymptoms();
   }
 
