@@ -64,7 +64,7 @@ public class AnalyticsCounter {
   * 
   * @param symptoms the map containing the number of occurrences of each symptom.
   */
-  public void writeSymptoms(Map<String, Integer> symptoms) { 
+  public void writeSymptoms(Map<String, Integer> symptoms) throws IOException { 
     writer.writeSymptoms(symptoms);
   }
     

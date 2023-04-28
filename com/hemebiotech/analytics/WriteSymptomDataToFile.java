@@ -19,13 +19,13 @@ public class WriteSymptomDataToFile implements ISymptomWriter {
   * @param symptoms the Map containing the symptom data to be written to the file
   */
   @Override
-  public void writeSymptoms(Map<String, Integer> symptoms) {
+ public void writeSymptoms(Map<String, Integer> symptoms) throws IOException {
     try (PrintWriter pw = new PrintWriter(new FileWriter(filepath))) {
       for (Map.Entry<String, Integer> sortie : symptoms.entrySet()) {
         pw.println(sortie.getKey() + " : " + sortie.getValue());
       }
     } catch (IOException ex) {
-      System.err.println("Erreur lors de l'écriture des symptômes dans le fichier " + filepath);
+      throw new IOException("Erreur lors de l'écriture des symptômes dans le fichier " + filepath);
     }
     System.out.println("Résultat sauvegardé dans le fichier " + filepath);
   }
