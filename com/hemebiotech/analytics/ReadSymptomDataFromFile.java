@@ -27,22 +27,28 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
   *
   * @return a list of strings containing the symptom data.
 */
-  @Override
-  public List<String> getSymptoms() {
+  @Override 
+  public List<String> getSymptoms() throws IOException {  
     ArrayList<String> result = new ArrayList<String>();
 
     if (filepath != null) {
+      BufferedReader reader = null;
       try {
-        BufferedReader reader = new BufferedReader(new FileReader(filepath));
+        reader = new BufferedReader(new FileReader(filepath));
         String line = reader.readLine();
         while (line != null) {
           result.add(line);
           line = reader.readLine();
         }
-        reader.close();
       } catch (IOException e) {
-        e.printStackTrace();
+        throw new IOException("Erreur lors de la lecture du fichier : " + filepath, e);
+      } finally {
+        if (reader != null) {
+          reader.close();
+        }
       }
+    } else {
+      throw new FileNotFoundException("Le chemin d'accès au fichier n'a pas été spécifié.");
     }
     return result;
   }
