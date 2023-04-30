@@ -21,8 +21,8 @@ public class WriteSymptomDataToFile implements ISymptomWriter {
   @Override
  public void writeSymptoms(Map<String, Integer> symptoms) throws IOException {
     try (PrintWriter pw = new PrintWriter(new FileWriter(filepath))) {
-      for (Map.Entry<String, Integer> sortie : symptoms.entrySet()) {
-        pw.println(sortie.getKey() + " : " + sortie.getValue());
+      for (Map.Entry<String, Integer> symptom : symptoms.entrySet()) {
+        pw.println(symptom.getKey() + " : " + symptom.getValue());
       }
     } catch (IOException ex) {
       throw new IOException("Erreur lors de l'écriture des symptômes dans le fichier " + filepath);
